@@ -1,4 +1,0 @@
----
-lastUpdated: true
----
-# JavaScript
