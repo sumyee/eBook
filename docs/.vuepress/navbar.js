@@ -1,7 +1,21 @@
 module.exports = [
   {
     text: '前端知识体系',
-    link: '/frontEnd',
+    // link: '/frontEnd',
+    children: [
+      {
+        text: 'JavaScript',
+        link: '/frontEnd/javaScript/',
+      },
+      {
+        text: 'CSS',
+        link: '/frontEnd/css/',
+      },
+      {
+        text: 'Hand Coding',
+        link: '/frontEnd/handCoding/',
+      },
+    ],
   },
   // NavbarGroup
   {
@@ -16,5 +30,23 @@ module.exports = [
   {
     text: '数据结构与算法',
     link: '/algorithm',
+  },
+  {
+    text: '工程化',
+    children: [
+      {
+        text: 'webpack 4',
+        link: '/engineering/webpack4/',
+      },
+    ],
+  },
+  {
+    text: '其他',
+    children: [
+      {
+        text: '正则表达式',
+        link: '/other/regex/',
+      },
+    ],
   },
 ];
