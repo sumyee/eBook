@@ -340,9 +340,9 @@ module.exports = {
 >
 > **<u>只转换syntax（class，typeof，箭头函数），不转换api（map，includes）</u>**
 
-#### **@babel/**polyfill、**@babel/**babel-runtime、@babel/plugin-transform-runtime 解析
+#### @babel/polyfill、@babel/babel-runtime、@babel/plugin-transform-runtime 解析
 
-- ####  **@babel/**polyfill
+- ####  @babel/polyfill
 
   > `@babel/polyfill`在`Babel 7.4.0`已被废弃
   >
@@ -524,5 +524,151 @@ module.exports = {
     }
   }
 }
+```
+
+### resolve 配置
+
+> `resolve` 配置 `webpack` 如何寻找模块所对应的文件。
+
+#### modules	
+
+> `resolve.modules` 配置 `webpack` 去哪些目录下寻找第三方模块，默认情况下，只会去 `node_modules` 下寻找
+
+```js
+//webpack.config.js
+module.exports = {
+    //....
+    resolve: {
+        modules: ['./src/components', 'node_modules'] //从左到右依次查找，先在 ./src/components 下寻找，找不到就去 node_modules 下寻找
+    }
+}
+```
+
+#### alias
+
+> `resolve.alias` 配置项通过别名把原导入路径映射成一个新的导入路径
+
+```js
+//webpack.config.js
+module.exports = {
+    //....
+    resolve: {
+        alias: {
+            '@': './src' // @ 就映射到 ./src
+        }
+    }
+}
+```
+
+#### extensions
+
+> 寻找文件后缀，如果没有配置 `extensions`，默认只会找对对应的 js 文件。
+>
+> 配置后，在引入文件时，可以省略文件后缀。
+
+```js
+//webpack.config.js
+module.exports = {
+    //....
+    resolve: {
+        extensions: ['js', '.json', '.vue'] // 先匹配 .js 文件，找不到就匹配 .json 文件，最后再匹配 .vue 文件
+    }
+}
+```
+
+#### mainFields
+
+> `resolve.mainFields` 默认配置是 `['browser', 'main']`，即首先找对应依赖 `package.json` 中的 `brower` 字段，如果没有，找 `main` 字段。
+
+例如 `bootstrap`，可以查看 `bootstrap` 的 `package.json` 文件：
+
+```json
+{
+    "style": "dist/css/bootstrap.css",
+    "sass": "scss/bootstrap.scss",
+    "main": "dist/js/bootstrap",
+}
+```
+
+如：`import 'bootstrap'` 默认情况下，找得是对应的依赖的 `package.json` 的 `main` 字段指定的文件，即 `dist/js/bootstrap`。
+
+假设我们希望，`import 'bootsrap'` 默认去找 `css` 文件的话，可以配置 `resolve.mainFields` 为:
+
+```js
+//webpack.config.js
+module.exports = {
+    //....
+    resolve: {
+        mainFields: ['style', 'main'] 
+    }
+}
+```
+
+### 定义环境变量
+
+> 使用 `webpack` 内置插件 `DefinePlugin` 来定义环境变量。
+>
+> 很多时候，我们在开发环境中会使用预发环境或者是本地的域名，生产环境中使用线上域名，我们可以在 `webpack` 定义环境变量，然后在代码中使用。
+
+```js
+//webpack.config.dev.js
+const webpack = require('webpack');
+module.exports = {
+    plugins: [
+        new webpack.DefinePlugin({
+            DEV: JSON.stringify('dev'), // 字符串
+            FLAG: 'true' // FLAG 是个布尔类型
+        })
+    ]
+}
+```
+
+```js
+//index.js
+if(DEV === 'dev') {
+    //开发环境
+}else {
+    //生产环境
+}
+```
+
+## 优化配置
+
+#### noParse
+
+> 不去解析和转化某些包，从而提升性能。
+
+```js
+//webpack.config.js
+module.exports = {
+    //...
+    module: {
+        noParse: /jquery|lodash/
+    }
+}
+```
+
+#### IgnorePlugin
+
+> `webpack` 的内置插件，作用是忽略第三方包指定目录。
+
+例如: `moment` (2.24.0版本) 会将所有本地化内容和核心功能一起打包，此时就可以使用 `IgnorePlugin` 在打包时忽略本地化内容。
+
+```js
+//webpack.config.js
+module.exports = {
+    //...
+    plugins: [
+        //忽略 moment 下的 ./locale 目录
+        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+    ]
+}
+```
+
+使用时，可以手动引入需要用到的语言包
+
+```js
+import moment from 'moment';
+import 'moment/locale/zh-cn'; // 手动引入
 ```
 
