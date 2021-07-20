@@ -35,8 +35,18 @@ module.exports = [
     text: '工程化',
     children: [
       {
-        text: 'webpack 4',
-        link: '/engineering/webpack4/',
+        text: 'webpack',
+        children: [
+          {
+            text: 'webpack 概念',
+            link: '/engineering/webpack/',
+            activeMatch: '/webpack/$',
+          },
+          {
+            text: 'webpack 4',
+            link: '/engineering/webpack/webpack4/',
+          },
+        ]
       },
     ],
   },

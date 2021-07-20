@@ -5,17 +5,6 @@ sidebar: auto
 
 # webpack(4) 笔记
 
-::: tip 概念
-
-[webpack](https://v4.webpack.docschina.org/concepts/) 是一个现代 JavaScript 应用程序的静态模块打包工具。当 webpack 处理应用程序时，它会在内部构建一个 依赖图(dependency graph)，此依赖图会映射项目所需的每个模块，并生成一个或多个 bundle。
-
-- 从 wepack V4.0.0 开始， webpack 是开箱即用的
-:::
-- **loader**： 模块转换器，用于对模块的源代码进行转换。（[webpack loader 从右到左 / 从底到顶执行](https://webpack.docschina.org/concepts/loaders/#configuration)））
-- **plugins(插件)**：  扩展插件，在 webpack 构建流程中的特定时机注入扩展逻辑来改变构建结果或做你想要做的事情
-
-> 打包后文件 -> 自执行函数
-
 ## 基础配置
 
 ### 初始化项目
@@ -634,7 +623,7 @@ if(DEV === 'dev') {
 
 ## 优化配置
 
-#### noParse
+### noParse
 
 > 不去解析和转化某些包，从而提升性能。
 
@@ -648,7 +637,7 @@ module.exports = {
 }
 ```
 
-#### IgnorePlugin
+### IgnorePlugin
 
 > `webpack` 的内置插件，作用是忽略第三方包指定目录。
 
@@ -672,7 +661,7 @@ import moment from 'moment';
 import 'moment/locale/zh-cn'; // 手动引入
 ```
 
-#### DllPlugin
+### DllPlugin
 
 > 动态链接库**（由于 webpack 4 有着比 dll 更好的打包性能，所以 Vue 弃用 dll）**
 >
@@ -754,7 +743,7 @@ module.exports = {
 <script src="./dll/react.dll.js"></script>
 ```
 
-#### happypack
+### happypack
 
 > 实现多线程打包**（用于大项目）**
 >
@@ -801,7 +790,7 @@ module.exports = {
 }
 ```
 
-#### 抽离公共代码
+### 抽离公共代码
 
 > `optimization.splitChunks` 把公共的模块抽离出来，单独打包
 >
@@ -836,7 +825,7 @@ module.exports = {
 }
 ```
 
-#### cache-loader
+### cache-loader
 
 > 在一些性能开销较大的 `loader` 之前添加 `cache-loader`，将结果缓存中磁盘中。默认保存在 `node_modueles/.cache/cache-loader` 目录下。
 
@@ -860,7 +849,7 @@ module.exports = {
 }
 ```
 
-#### HardSourceWebpackPlugin
+### HardSourceWebpackPlugin
 
 > `HardSourceWebpackPlugin` 为模块提供中间缓存，缓存默认的存放路径是: `node_modules/.cache/hard-source`。
 
