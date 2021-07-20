@@ -672,3 +672,212 @@ import moment from 'moment';
 import 'moment/locale/zh-cn'; // 手动引入
 ```
 
+#### DllPlugin
+
+> 动态链接库**（由于 webpack 4 有着比 dll 更好的打包性能，所以 Vue 弃用 dll）**
+>
+> 将不会频繁更新的库进行编译，当这些依赖的版本没有变化时，就不需要重新编译
+
+创建 `webpack.config.dll.js` 文件：
+
+```js
+// webpack.config.dll.js
+const path = require('path')
+const webpack = require('webpack')
+
+module.exports = {
+    mode: 'development',
+    entry: {
+        react: ['react', 'react-dom']
+    },
+    output: {
+        filename: '[name].dll.js',
+        path: path.resolve(__dirname, '../dist', 'dll'),
+        library: '[name]_dll', // 暴露给外部使用
+        libraryTarget: 'umd', // libraryTarget 指定如何暴露内容，缺省时就是 var
+    },
+    plugins: [
+        new webpack.DllPlugin({
+            // name 和 library 一致
+            name: '[name]_dll',
+            // manifest.json 用于让 DLLReferencePlugin 映射到相关依赖上
+            path: path.resolve(__dirname, '../dist', 'dll', 'manifest.json')
+        })
+    ]
+}
+```
+
+在 `package.json` 的 `scripts` 中增加:
+
+```json
+{
+    "scripts": {
+        // ...
+        "build:dll": "webpack --config webpack.config.dll.js"
+    },
+}
+```
+
+`webpack.config.js` 中的配置：
+
+> **DllReferencePlugin** 这个插件是在 *webpack.config.js* 中使用的
+>
+> 该插件的作用是把在 *webpack.config.dll.js* 中打包生成的 **dll** 文件引用到需要的预编译的依赖上来。
+>
+> 就是说在 *webpack.config.dll.js* 中打包后比如会生成 *vendor.dll.js*文件和*vendor-manifest.json*文件，*vendor.dll.js*文件包含所有的第三方库文件，*vendor-manifest.json*文件会包含所有库代码的一个索引，当在使用*webpack.config.js*文件打包**DllReferencePlugin**插件的时候，会使用该**DllReferencePlugin**插件读取*vendor-manifest.json*文件，看看是否有该第三方库。*vendor-manifest.json*文件就是有一个第三方库的一个映射而已。
+
+```js
+//webpack.config.js
+const webpack = require('webpack');
+const path = require('path');
+module.exports = {
+    //...
+    devServer: {
+        contentBase: path.resolve(__dirname, 'dist')
+    },
+    plugins: [
+        // 建立链接，优先查找 json 文件中的映射
+        new webpack.DllReferencePlugin({
+            manifest: path.resolve(__dirname, 'dist', 'dll', 'manifest.json')
+        }),
+        new CleanWebpackPlugin({
+            cleanOnceBeforeBuildPatterns: ['**/*', '!dll', '!dll/**'] //不删除dll目录
+        }),
+        //...
+    ]
+}
+```
+
+还要在 `public/index.html`文件中，引入`react_dll.js`：
+
+```html
+<script src="./dll/react.dll.js"></script>
+```
+
+#### happypack
+
+> 实现多线程打包**（用于大项目）**
+>
+> `HappyPack` 把任务分解给多个子进程去并发的执行，子进程处理完后再把结果发送给主进程。
+
+```bash
+npm install happypack -D
+```
+
+修改配置`webpack.config.js`文件:
+
+```js
+const Happypack = require('happypack');
+module.exports = {
+    //...
+    module: {
+        rules: [
+            {
+                test: /\.js[x]?$/,
+                use: 'Happypack/loader?id=js', // id 是为了plugin查找
+                include: [path.resolve(__dirname, 'src')]
+            },
+            { 
+                test: /\.css$/,
+                use: 'Happypack/loader?id=css',
+                include: [
+                    path.resolve(__dirname, 'src'),
+                    path.resolve(__dirname, 'node_modules', 'bootstrap', 'dist')
+                ]
+            }
+        ]
+    },
+    plugins: [
+        new Happypack({
+            id: 'js', // 和rule中的id=js对应
+            // 将之前 rule 中的 loader 在此配置
+            use: ['babel-loader'] // 必须是数组
+        }),
+        new Happypack({
+            id: 'css', // 和rule中的id=css对应
+            use: ['style-loader', 'css-loader','postcss-loader'],
+        })
+    ]
+}
+```
+
+#### 抽离公共代码
+
+> `optimization.splitChunks` 把公共的模块抽离出来，单独打包
+>
+> 公共代码只需要下载一次就缓存起来了，避免了重复下载。
+
+```js
+//webpack.config.js
+module.exports = {
+    optimization: {
+        splitChunks: { // 分割代码块
+            cacheGroups: {
+                vendor: {
+                    // 第三方依赖
+                    priority: 1, // 设置优先级，首先抽离第三方模块
+                    name: 'vendor',
+                    test: /node_modules/,
+                    chunks: 'initial',
+                    minSize: 0,
+                    minChunks: 1 // 最少引入了1次
+                },
+                // 缓存组
+                common: {
+                    // 公共模块
+                    chunks: 'initial',
+                    name: 'common',
+                    minSize: 100, // 大小超过100个字节
+                    minChunks: 3 // 最少引入了3次
+                }
+            }
+        }
+    }
+}
+```
+
+#### cache-loader
+
+> 在一些性能开销较大的 `loader` 之前添加 `cache-loader`，将结果缓存中磁盘中。默认保存在 `node_modueles/.cache/cache-loader` 目录下。
+
+```bash
+npm install cache-loader -D
+```
+
+```js
+// webpack.config.js
+module.exports = {
+    //...
+
+    module: {
+        rules: [
+            {
+                test: /\.jsx?$/,
+                use: ['cache-loader','babel-loader']
+            }
+        ]
+    }
+}
+```
+
+#### HardSourceWebpackPlugin
+
+> `HardSourceWebpackPlugin` 为模块提供中间缓存，缓存默认的存放路径是: `node_modules/.cache/hard-source`。
+
+配置 `hard-source-webpack-plugin`，首次构建时间没有太大变化，但是第二次开始，构建时间大约可以节约 80%
+
+```bash
+npm install hard-source-webpack-plugin -D
+```
+
+````js
+//webpack.config.js
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+module.exports = {
+    //...
+    plugins: [
+        new HardSourceWebpackPlugin()
+    ]
+}
+````
+
