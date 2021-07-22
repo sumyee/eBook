@@ -51,6 +51,15 @@ module.exports = [
     ],
   },
   {
+    text: '性能优化',
+    children: [
+      {
+        text: '全链路性能优化',
+        link: '/optimization/performance/',
+      },
+    ],
+  },
+  {
     text: '其他',
     children: [
       {

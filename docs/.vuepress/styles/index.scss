@@ -169,8 +169,9 @@ html {
   background: #333
 }
 
-
-
+div[class*=language-] {
+  box-shadow: 0 0 18px #656565;
+}
 
 // 
 // 

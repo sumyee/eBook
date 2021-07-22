@@ -10,7 +10,7 @@ module.exports = {
     },
     {
       text: '🎨 CSS',
-      children: ['/frontEnd/css/'],
+      children: ['/frontEnd/css/bfc/'],
     },
     {
       text: '✍️ Hand Coding',
@@ -38,7 +38,7 @@ module.exports = {
     },
     {
       text: '练习题',
-      children: ['/algorithm/exercises/']
-    }
+      children: ['/algorithm/exercises/'],
+    },
   ],
 };

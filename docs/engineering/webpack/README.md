@@ -55,3 +55,6 @@ Webpack 的运行流程是一个串行的过程,从启动到结束会依次执�
 3. webpack 处理好 chunk 文件后，最后会输出 **`bundle`** 文件，这个 bundle 文件包含了经过加载和编译的最终源文件，所以它可以直接在浏览器中运行。
 
 ![image-20210720160404133](https://i.loli.net/2021/07/20/yCTH2cPgXz1sfp8.png)
+
+## 流程图解
+![e748c143c2474494989674e129daaa94_tplv-k3u1fbpfcp-zoom-1.jpg](https://i.loli.net/2021/07/22/YK4uE9Zg3GpQ7Hw.jpg)

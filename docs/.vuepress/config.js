@@ -30,9 +30,9 @@ module.exports = {
     sidebar,
     sidebarDepth: 4,
   },
-  // themePlugins: {
-  //   mediumZoom: false,
-  // },
+  themePlugins: {
+    mediumZoom: false,
+  },
   plugins: [
     [
       '@vuepress/plugin-search',
@@ -41,10 +41,13 @@ module.exports = {
         searchMaxSuggestions: 10, // 默认是5
       },
     ],
-    ['@vuepress/plugin-shiki', {
-      theme: 'monokai',
-      // theme: 'github-dark',
-      // theme: 'dark-plus',
-    }],
+    [
+      '@vuepress/plugin-shiki',
+      {
+        theme: 'monokai',
+        // theme: 'github-dark',
+        // theme: 'dark-plus',
+      },
+    ],
   ],
 };
