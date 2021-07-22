@@ -67,7 +67,7 @@
   --homepage-width: 960px;
 
   // 
-  --code-ln-wrapper-width: 2.5rem;
+  --code-ln-wrapper-width: 2rem;
 }
 
 html {
@@ -182,7 +182,7 @@ div[class*=language-]::before {
   background: url(/images/mac.svg);
   height: 40px;
   width: 100%;
-  background-size: 40px;
+  background-size: 48px;
   background-repeat: no-repeat;
   background-color: transparent;
   background-position: 10px 10px;
@@ -190,7 +190,7 @@ div[class*=language-]::before {
   border-radius: 6px 6px 0 0;
   background-color: var(--code-bg-color);
   padding-right: 1rem;
-  line-height: 40px;
+  line-height: 34px;
   right: 0;
   top: 0;
   box-sizing: border-box;
@@ -204,11 +204,19 @@ div[class*=language-].line-numbers-mode .line-numbers {
 div[class*=language-] .highlight-lines {
   padding-top: 2.5rem;
 }
+code {
+  overflow-wrap: initial;
+}
 @media (max-width: 419px) {
   .theme-default-content div[class*=language-] {
     margin: 0.85rem -0.5rem;
     border-radius: 6px;
+  }
 }
+
+.theme-default-content:not(.custom) img {
+  max-width: 100%;
+  box-shadow: 0 0 15px -2px #dadada;
 }
 // 
 // 
