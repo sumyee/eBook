@@ -65,6 +65,9 @@
   --sidebar-width-mobile: calc(var(--sidebar-width) * 0.82);
   --content-width: 740px;
   --homepage-width: 960px;
+
+  // 
+  --code-ln-wrapper-width: 2.5rem;
 }
 
 html {
@@ -171,8 +174,42 @@ html {
 
 div[class*=language-] {
   box-shadow: 0 0 18px #656565;
+  // overflow: hidden;
 }
 
+div[class*=language-]::before {
+  display: block;
+  background: url(/images/mac.svg);
+  height: 40px;
+  width: 100%;
+  background-size: 40px;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: 10px 10px;
+  text-align: right;
+  border-radius: 6px 6px 0 0;
+  background-color: var(--code-bg-color);
+  padding-right: 1rem;
+  line-height: 40px;
+  right: 0;
+  top: 0;
+  box-sizing: border-box;
+}
+div[class*=language-] pre, div[class*=language-] pre[class*=language-] {
+  padding: 2.5rem 1.5rem 1rem;
+}
+div[class*=language-].line-numbers-mode .line-numbers {
+  padding-top: 2.5rem;
+}
+div[class*=language-] .highlight-lines {
+  padding-top: 2.5rem;
+}
+@media (max-width: 419px) {
+  .theme-default-content div[class*=language-] {
+    margin: 0.85rem -0.5rem;
+    border-radius: 6px;
+}
+}
 // 
 // 
 // 
