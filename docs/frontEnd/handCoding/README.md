@@ -1,5 +1,6 @@
 ---
 title: 手写代码
+sidebar: auto
 ---
 
 # 手写代码
@@ -70,3 +71,9 @@ title: 手写代码
 
 ### flatten
 @[code js](./code/Array/flatten.js)
+
+## Promise
+@[code js](./code/promise.js)
+
+## 柯里化
+@[code js](./code/currying.js)

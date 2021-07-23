@@ -12,15 +12,18 @@
 
 - 浮动元素，`float` 值不为 `none`
 - 绝对定位元素，`position` 属性为 `absolute`，`fixed`
-- 非块级盒子的块级容器（`display`值为`inline-block`，`table-cells`，`table-captions`等）
+- 内联块 (元素具有 `display: inline-block`)
+- 表格单元格 (元素具有 `display: table-cell`，HTML表格单元格默认属性)
+- 表格标题 (元素具有 `display: table-caption`, HTML表格标题默认属性)
 - `overflow`值不为`visible`（`visible`是默认值。内容不会被修剪，会呈现在元素框之外）
+- 弹性盒（`flex`或`inline-flex`）
 - ***除此之外，根元素，HTML元素本身就是BFC（最大的一个BFC）***
 
 ## BFC 布局规则
 
 - 内部盒子会在垂直方向，一个一个地放置
 - 盒子垂直方向的距离由`margin`决定，属于同一个 **BFC** 的两个相邻 **Box** 的上下`margin`会发生重叠
-- 每个元素的左边，与包含的盒子的左边相接处，即使存在浮动也是如此
+- 每个元素的`margin box`的左边，与容器块`border box`的左边相接触(对于从左往右的格式化，否则相反)，即使存在浮动也是如此
 - **BFC** 的区域不会与`float`重叠
 - **BFC** 就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素，反之也是如此
 
@@ -49,7 +52,7 @@
     .right {
         height: 100px;
         background: #409eff;
-        overflow: hidden; // 触发 BFC
+        overflow: hidden; /* 触发 BFC */
     }
 </style>
 ```
@@ -152,4 +155,6 @@
 </div>
 
 
-
+```
+<Badge type="tip" text="v2" vertical="top" />
+```

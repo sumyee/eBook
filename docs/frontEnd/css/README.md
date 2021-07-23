@@ -1,7 +1,8 @@
-<!-- ---
+---
 title: CSS
 # sidebar: auto
 ---
+# CSS
 
-## BFC
- -->
+
+<Badge type="tip" text="css" />

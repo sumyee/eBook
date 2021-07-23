@@ -1,4 +1,4 @@
 ---
-# lastUpdated: false
+sidebar: auto
 ---
 # JavaScript

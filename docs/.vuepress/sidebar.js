@@ -1,20 +1,26 @@
 module.exports = {
-  '/frontEnd': [
-    {
-      text: '前端知识体系',
-      // link: '/frontEnd/',🎉
-    },
-    {
-      text: '👉 JavaScript',
-      children: ['/frontEnd/javaScript/'],
-    },
+  // '/frontEnd': [
+  //   {
+  //     text: '前端知识体系',
+  //     // link: '/frontEnd/',🎉
+  //   },
+  //   {
+  //     text: '👉 JavaScript',
+  //     children: ['/frontEnd/javaScript/'],
+  //   },
+  //   {
+  //     text: '🎨 CSS',
+  //     children: ['/frontEnd/css/bfc/'],
+  //   },
+  //   {
+  //     text: '✍️ Hand Coding',
+  //     children: ['/frontEnd/handCoding/'],
+  //   },
+  // ],
+  '/frontEnd/css/': [
     {
       text: '🎨 CSS',
       children: ['/frontEnd/css/bfc/'],
-    },
-    {
-      text: '✍️ Hand Coding',
-      children: ['/frontEnd/handCoding/'],
     },
   ],
   '/browser/': [
