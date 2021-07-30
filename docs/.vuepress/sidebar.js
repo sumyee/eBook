@@ -27,11 +27,11 @@ module.exports = {
     {
       text: '浏览器相关',
     },
-    {
-      text: '💻 浏览器工作原理与实践',
+    // {
+      // text: '💻 浏览器工作原理与实践',
       // link: '/browser/principle',
-      children: ['/browser/principle/01.md', '/browser/principle/02.md'],
-    },
+      // children: ['/browser/principle/01.md', '/browser/principle/02.md'],
+    // },
   ],
   '/algorithm': [
     {

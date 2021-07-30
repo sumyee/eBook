@@ -8,14 +8,11 @@
   "devDependencies": {
     "vuepress": "^2.0.0-beta.22",
     "vuepress-plugin-auto-sidebar": "^2.4.0-alpha.1",
+    "vuepress-plugin-photo-swipe": "^2.0.0-alpha.5",
     "vuepress-vite": "^2.0.0-beta.22"
   },
   "dependencies": {
     "@vuepress/plugin-search": "^2.0.0-beta.22",
-    "@vuepress/plugin-shiki": "^2.0.0-beta.5",
-    "global": "^4.4.0",
-    "mddir": "^1.1.1",
-    "stylus-converter": "^0.8.1",
-    "vuepress-theme-hope": "^1.19.0"
+    "@vuepress/plugin-shiki": "^2.0.0-beta.5"
   }
 }

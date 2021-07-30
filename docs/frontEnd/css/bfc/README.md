@@ -153,8 +153,3 @@
 <div class="right" style="height: 200px;color: #fff;background: #409eff;overflow: hidden;">
     没有设置浮动。但是触发了 BFC
 </div>
-
-
-```
-<Badge type="tip" text="v2" vertical="top" />
-```

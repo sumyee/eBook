@@ -17,11 +17,11 @@ module.exports = {
       },
     ],
   ],
-  // markdown: {
-  //   code: {
-  //     lineNumbers: false,
-  //   }
-  // },
+  markdown: {
+    code: {
+      lineNumbers: false,
+    }
+  },
   themeConfig: {
     logo: 'https://vuejs.org/images/logo.png',
     // lastUpdated: true,
@@ -49,5 +49,8 @@ module.exports = {
         // theme: 'dark-plus',
       },
     ],
+    // ["photo-swipe", {
+    //   selector: '.theme-default-content :not(.custom) > img'
+    // }],
   ],
 };

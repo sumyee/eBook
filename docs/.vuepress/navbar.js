@@ -23,7 +23,7 @@ module.exports = [
     children: [
       {
         text: '浏览器工作原理与实践',
-        link: '/browser/principle/01.md',
+        link: '/browser/principle/',
       },
     ],
   },
@@ -56,6 +56,15 @@ module.exports = [
       {
         text: '全链路性能优化',
         link: '/optimization/performance/',
+      },
+    ],
+  },
+  {
+    text: '网络与安全',
+    children: [
+      {
+        text: 'HTTP',
+        link: '/network/',
       },
     ],
   },
