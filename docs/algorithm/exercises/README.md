@@ -4,9 +4,9 @@ sidebar: auto
 ---
 
 ## 扁平数据结构转Tree
-@[code{1-35} js](./code/dataToTree.js)
+@[code{1-35} js](./code/arrayToTree.js)
 ### 暴力递归
-@[code{37-65} js](./code/dataToTree.js)
+@[code{37-} js](./code/arrayToTree.js)
 
 ## LRU（最近最少使用）缓存机制
 

@@ -47,19 +47,27 @@ let arr = [
   { id: 10, name: '部门10', pid: 8 },
 ];
 
-// 递归 找孩子 --- 暴力法
-const getChildren = (data, pid, result) => {
-  for (const item of data) {
+// 递归 --- 暴力法
+function arrayToTree(arr, pid) {
+  const result = [];
+  for (const item of arr) {
     if (item.pid === pid) {
-      const newItem = { ...item, children: [] };
-      result.push(newItem);
-      getChildren(data, item.id, newItem.children);
+      item.children = arrayToTree(arr, item.id);
+      result.push(item);
     }
   }
-};
-
-const arrayToTree = (pid) => {
-  const result = [];
-  getChildren(arr, pid, result);
   return result;
-};
+}
+
+// 引用版
+function arrayToTree(arr, pid) {
+  return arr.filter((parent) => {
+    const children = arr.filter((child) => {
+      return child.pid === parent.id;
+    });
+
+    parent.children = children || [];
+
+    return parent.pid === pid;
+  });
+}
