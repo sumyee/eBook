@@ -12,8 +12,8 @@ module.exports = [
         link: '/frontEnd/css/',
       },
       {
-        text: 'Hand Coding',
-        link: '/frontEnd/handCoding/',
+        text: 'BOM',
+        link: '/frontEnd/bom/',
       },
     ],
   },
@@ -29,7 +29,20 @@ module.exports = [
   },
   {
     text: '数据结构与算法',
-    link: '/algorithm',
+    children: [
+      {
+        text: 'LeetCode',
+        link: '/algorithm/leetCode/',
+      },
+      {
+        text: '排序算法',
+        link: '/algorithm/sort/',
+      },
+      {
+        text: '算法练习',
+        link: '/algorithm/exercises/',
+      },
+    ],
   },
   {
     text: '工程化',
@@ -54,7 +67,7 @@ module.exports = [
     text: '性能优化',
     children: [
       {
-        text: '全链路性能优化',
+        text: '关键渲染路径',
         link: '/optimization/performance/',
       },
     ],
@@ -72,8 +85,25 @@ module.exports = [
     text: '其他',
     children: [
       {
+        text: 'Hand Coding',
+        link: '/other/handCoding/',
+      },
+      {
         text: '正则表达式',
         link: '/other/regex/',
+      },
+      {
+        text: 'Git',
+        link: '/other/git/',
+      },
+    ],
+  },
+  {
+    text: 'Interview',
+    children: [
+      {
+        text: '浏览器',
+        link: '/interview/browser/',
       },
     ],
   },

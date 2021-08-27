@@ -218,6 +218,8 @@ div[class*=language-] .highlight-lines {
   padding-top: 2.5rem;
 }
 code {
+  font-size: 0.9rem;
+  padding: 0.15rem 0.35rem;
   overflow-wrap: initial;
 }
 @media (max-width: 419px) {
@@ -253,6 +255,10 @@ code {
     // box-shadow: rgb(0 0 0 / 18%) 0px 4px 10px;
     box-shadow: 1px 8px 20px rgb(0 0 0 / 20%);
   }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
 }
 
 h2 {

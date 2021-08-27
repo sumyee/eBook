@@ -6,8 +6,26 @@
  * @param {Boolean} immediate 立即执行
  * @returns
  */
+
+// 简单版
+function debounce(fn, wait) {
+  let timer = null;
+
+  return function () {
+    const args = arguments;
+    const context = this;
+
+    clearTimeout(timer);
+
+    timer = setTimeout(function () {
+      fn.apply(context, args);
+    }, wait);
+  };
+}
+
+// 可立即执行、可取消 版
 function debounce(func, wait, immediate) {
-  let timer;
+  let timer, result;
 
   var debounced = function () {
     const context = this;
@@ -18,21 +36,33 @@ function debounce(func, wait, immediate) {
     if (immediate) {
       // 是否执行过
       const called = timer;
+      // 等待 wait 秒后才可再次触发函数执行
       timer = setTimeout(() => {
         timer = null;
       }, wait);
       // 如果没执行过，立即执行
-      if (!called) func.apply(context, args);
+      if (!called) {
+        result = func.apply(context, args);
+      }
     } else {
       timer = setTimeout(function () {
         func.apply(context, args);
       }, wait);
     }
+
+    // 返回函数执行结果
+    return result;
+  };
+
+  // 取消方法
+  debounced.cancel = function () {
+    clearTimeout(timer);
+    timer = null;
   };
 
   return debounced;
 }
-const fn = a => {
+const fn = (a) => {
   console.log(a);
 };
 const de = debounce(fn, 1000);

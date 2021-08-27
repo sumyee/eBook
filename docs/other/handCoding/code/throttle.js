@@ -43,22 +43,24 @@
 // 结合版
 function throttle(fn, wait) {
   let timer = null;
-  let startTime = 0;
+  let previous = 0;
 
   return function () {
     const context = this;
     const args = arguments;
     const now = Date.now();
 
-    // 执行剩余时间
-    const remaining = wait - (now - startTime);
+    // 下次触发 fn 剩余时间
+    const remaining = wait - (now - previous);
 
     clearTimeout(timer);
 
     if (remaining <= 0) {
+      // 没有剩余时间（或者首次） 立即触发 fn
       fn.apply(context, args);
-      startTime = Date.now();
+      previous = Date.now();
     } else {
+      // 最后一次触发，在剩余时间后执行
       timer = setTimeout(fn, remaining);
     }
   };

@@ -1,22 +1,10 @@
 module.exports = {
-  // '/frontEnd': [
-  //   {
-  //     text: '前端知识体系',
-  //     // link: '/frontEnd/',🎉
-  //   },
-  //   {
-  //     text: '👉 JavaScript',
-  //     children: ['/frontEnd/javaScript/'],
-  //   },
-  //   {
-  //     text: '🎨 CSS',
-  //     children: ['/frontEnd/css/bfc/'],
-  //   },
-  //   {
-  //     text: '✍️ Hand Coding',
-  //     children: ['/frontEnd/handCoding/'],
-  //   },
-  // ],
+  '/frontEnd/javaScript/': [
+    {
+      text: '👉 JavaScript',
+      children: ['/frontEnd/javaScript/jicheng/'],
+    },
+  ],
   '/frontEnd/css/': [
     {
       text: '🎨 CSS',
@@ -37,14 +25,13 @@ module.exports = {
     {
       text: '数据结构与算法',
     },
-    {
-      text: '排序算法',
-      // link: '/algorithm/sort',
-      children: ['/algorithm/sort/'],
-    },
-    {
-      text: '练习题',
-      children: ['/algorithm/exercises/'],
-    },
+    // {
+    //   text: '排序算法',
+    //   children: ['/algorithm/sort/'],
+    // },
+    // {
+    //   text: '练习题',
+    //   children: ['/algorithm/exercises/'],
+    // },
   ],
 };
