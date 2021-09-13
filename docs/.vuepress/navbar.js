@@ -73,11 +73,19 @@ module.exports = [
     ],
   },
   {
-    text: '网络与安全',
+    text: '网络',
     children: [
       {
-        text: 'HTTP',
+        text: '网络分层模型',
         link: '/network/',
+      },
+      {
+        text: 'HTTP',
+        link: '/network/http',
+      },
+      {
+        text: 'TCP & UDP',
+        link: '/network/tcp-udp',
       },
     ],
   },
